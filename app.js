@@ -1,25 +1,25 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const { App, LogLevel } = require('@slack/bolt');
+const { App, LogLevel } = require("@slack/bolt");
 
-const { Sequelize } = require('sequelize');
+const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(process.env.DB_URI);
 
-const { registerListeners } = require('./listeners');
+const { registerListeners } = require("./listeners");
 
 let logLevel;
 switch (process.env.LOG_LEVEL) {
-  case 'debug':
+  case "debug":
     logLevel = LogLevel.DEBUG;
     break;
-  case 'info':
+  case "info":
     logLevel = LogLevel.INFO;
     break;
-  case 'warn':
+  case "warn":
     logLevel = LogLevel.WARN;
     break;
-  case 'error':
+  case "error":
     logLevel = LogLevel.ERROR;
     break;
   default:
@@ -40,17 +40,17 @@ registerListeners(app);
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
     // eslint-disable-next-line no-console
-    console.log('All models were synchronized successfully.');
+    console.log("All models were synchronized successfully.");
     // eslint-disable-next-line no-console
-    console.log('Connection has been established successfully.');
+    console.log("Connection has been established successfully.");
     // Start your app
     await app.start();
 
     // eslint-disable-next-line no-console
-    console.log('⚡️ Tasks app is running!');
+    console.log("⚡️ Feedback App app is running!");
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Unable to start App', error);
+    console.error("Unable to start App", error);
     process.exit(1);
   }
 })();

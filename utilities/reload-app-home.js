@@ -10,7 +10,6 @@ module.exports = async (client, slackUserID, slackWorkspaceID, navTab) => {
   try {
     const queryResult = await User.findOrCreate({
       where: {
-        slackUserID,
         slackWorkspaceID,
       },
       include: [
@@ -37,7 +36,7 @@ module.exports = async (client, slackUserID, slackWorkspaceID, navTab) => {
       });
 
       await client.views.publish({
-        user_id: slackUserID,
+        user_id: slackWorkspaceID,
         view: completedTasksView(recentlyCompletedTasks),
       });
       return;
@@ -51,7 +50,7 @@ module.exports = async (client, slackUserID, slackWorkspaceID, navTab) => {
     });
 
     await client.views.publish({
-      user_id: slackUserID,
+      user_id: slackWorkspaceID,
       view: openTasksView(openTasks),
     });
   } catch (error) {

@@ -29,7 +29,7 @@ const viewPayloadBase = (
       {
         type: "input",
         block_id: "taskTitle",
-        label: { type: "plain_text", text: "New task", emoji: true },
+        label: { type: "plain_text", text: "Feedback", emoji: true },
         optional: false,
         dispatch_action: false,
         element: {
@@ -37,7 +37,7 @@ const viewPayloadBase = (
           action_id: "taskTitle",
           placeholder: {
             type: "plain_text",
-            text: "Do this thing",
+            text: "Write a feedback",
             emoji: true,
           },
           dispatch_action_config: { trigger_actions_on: ["on_enter_pressed"] },
@@ -101,7 +101,7 @@ const viewPayloadBase = (
     clear_on_close: false,
     notify_on_close: false,
     close: null,
-    submit: { type: "plain_text", text: "Create", emoji: true },
+    submit: { type: "plain_text", text: "Submit", emoji: true },
     previous_view_id: null,
     root_view_id: "V029MB07XS6",
     app_id: "A029RUYCM3J",

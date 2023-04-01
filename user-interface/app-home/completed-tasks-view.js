@@ -5,53 +5,54 @@ const {
   Section,
   Actions,
   Elements,
-} = require('slack-block-builder');
-const pluralize = require('pluralize');
+} = require("slack-block-builder");
+const pluralize = require("pluralize");
 
 module.exports = (recentlyCompletedTasks) => {
   const homeTab = HomeTab({
-    callbackId: 'tasks-home',
-    privateMetaData: 'completed',
+    callbackId: "tasks-home",
+    privateMetaData: "completed",
   }).blocks(
-    Actions({ blockId: 'task-creation-actions' }).elements(
-      Elements.Button({ text: 'Open tasks' })
-        .value('app-home-nav-open')
-        .actionId('app-home-nav-open'),
-      Elements.Button({ text: 'Completed tasks' })
-        .value('app-home-nav-completed')
-        .actionId('app-home-nav-completed')
+    Actions({ blockId: "task-creation-actions" }).elements(
+      Elements.Button({ text: "All Feedbacks" })
+        .value("app-home-nav-open")
+        .actionId("app-home-nav-open")
         .primary(true),
-      Elements.Button({ text: 'Create a task' })
-        .value('app-home-nav-create-a-task')
-        .actionId('app-home-nav-create-a-task'),
-    ),
+      Elements.Button({ text: "Reopen Feedback" })
+        .value("app-home-nav-completed")
+        .actionId("app-home-nav-completed"),
+      Elements.Button({ text: "Write Feedback" })
+        .value("app-home-nav-create-a-task")
+        .actionId("app-home-nav-create-a-task")
+    )
   );
 
   if (recentlyCompletedTasks.length === 0) {
     homeTab.blocks(
-      Header({ text: 'No completed tasks' }),
+      Header({ text: "No completed tasks" }),
       Divider(),
-      Section({ text: "Looks like you've got nothing completed." }),
+      Section({ text: "Looks like you've got nothing completed." })
     );
     return homeTab.buildToJSON();
   }
 
   const completedTaskList = recentlyCompletedTasks.map((task) =>
-    Section({ text: `• ~${task.title}~` }).accessory(
-      Elements.Button({ text: 'Reopen' })
+    Section({ text: `• * ${task.title}  ` }).accessory(
+      Elements.Button({ text: "Reopen" })
         .value(`${task.id}`)
-        .actionId('reopen-task'),
-    ),
+        .actionId("reopen-task")
+    )
   );
 
   homeTab.blocks(
     Header({
-      text: `You have ${
+      text: `You have ${recentlyCompletedTasks.length} recently ${pluralize(
+        "Feedback",
         recentlyCompletedTasks.length
-      } recently completed ${pluralize('task', recentlyCompletedTasks.length)}`,
+      )}`,
     }),
     Divider(),
-    completedTaskList,
+    completedTaskList
   );
 
   return homeTab.buildToJSON();
