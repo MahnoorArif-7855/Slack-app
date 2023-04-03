@@ -18,5 +18,6 @@ test("Returns blocks for the task creation error modal", () => {
     ],
     type: "modal",
   };
+  
   expect(taskCreationError("Feedback Title")).toBe(JSON.stringify(expected));
 });
