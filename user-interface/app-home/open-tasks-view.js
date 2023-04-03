@@ -46,7 +46,7 @@ module.exports = (openTasks) => {
   let holdingArray = [];
   let start = 0;
   const end = openTasks.length;
-  const maxOptionsLength = 10;
+  const maxOptionsLength = 100;
 
   for (start, end; start < end; start += maxOptionsLength) {
     holdingArray = openTasks.slice(start, start + maxOptionsLength);
@@ -74,7 +74,7 @@ module.exports = (openTasks) => {
     );
   }
   const completedTaskList = holdingArray.map((task) =>
-    Section({ text: `--> ${task.title}` })
+    Section({ text: `• ${task.title}` })
   );
 
   homeTab.blocks(
@@ -85,8 +85,7 @@ module.exports = (openTasks) => {
       )}`,
     }),
     Divider(),
-    completedTaskList,
-    tasksInputsArray
+    completedTaskList
   );
   // homeTab.blocks(
   //   Header({

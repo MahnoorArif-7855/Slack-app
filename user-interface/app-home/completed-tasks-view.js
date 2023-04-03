@@ -37,7 +37,7 @@ module.exports = (recentlyCompletedTasks) => {
   }
 
   const completedTaskList = recentlyCompletedTasks.map((task) =>
-    Section({ text: `• * ${task.title}  ` }).accessory(
+    Section({ text: `• ~${task.title}~ ` }).accessory(
       Elements.Button({ text: "Reopen" })
         .value(`${task.id}`)
         .actionId("reopen-task")

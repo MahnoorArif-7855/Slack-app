@@ -36,7 +36,7 @@ module.exports = async (client, slackUserID, slackWorkspaceID, navTab) => {
       });
 
       await client.views.publish({
-        user_id: slackWorkspaceID,
+        user_id: slackUserID,
         view: completedTasksView(recentlyCompletedTasks),
       });
       return;
@@ -50,7 +50,7 @@ module.exports = async (client, slackUserID, slackWorkspaceID, navTab) => {
     });
 
     await client.views.publish({
-      user_id: slackWorkspaceID,
+      user_id: slackUserID,
       view: openTasksView(openTasks),
     });
   } catch (error) {
