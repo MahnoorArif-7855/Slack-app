@@ -1,35 +1,34 @@
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 const {
   openTasksView,
   completedTasksView,
-} = require('../user-interface/app-home');
-const { User, Task } = require('../models');
+} = require("../user-interface/app-home");
+const { User, Feedback } = require("../models");
 
 module.exports = async (client, slackUserID, slackWorkspaceID, navTab) => {
   try {
     const queryResult = await User.findOrCreate({
       where: {
-        slackUserID,
         slackWorkspaceID,
       },
       include: [
         {
-          model: Task,
-          as: 'createdTasks',
+          model: Feedback,
+          as: "createdTasks",
         },
         {
-          model: Task,
-          as: 'assignedTasks',
+          model: Feedback,
+          as: "assignedTasks",
         },
       ],
     });
     const user = queryResult[0];
 
-    if (navTab === 'completed') {
+    if (navTab === "completed") {
       const recentlyCompletedTasks = await user.getAssignedTasks({
         where: {
-          status: 'CLOSED',
+          status: "CLOSED",
           updatedAt: {
             [Op.gt]: new Date(new Date() - 24 * 60 * 60 * 1000),
           },
@@ -45,9 +44,9 @@ module.exports = async (client, slackUserID, slackWorkspaceID, navTab) => {
 
     const openTasks = await user.getAssignedTasks({
       where: {
-        status: 'OPEN',
+        status: "OPEN",
       },
-      order: [['dueDate', 'ASC']],
+      order: [["dueDate", "ASC"]],
     });
 
     await client.views.publish({

@@ -1,22 +1,22 @@
 const {
   validateAppHomeOpenedCallback,
   mockAppHomeEventCallbackInput,
-} = require('./__utils__/event-test-util-funcs');
+} = require("./__utils__/event-test-util-funcs");
 const {
   mockAppHomeOpenedEventNewUser,
   mockAppHomeOpenedEventExistingUser,
-} = require('./__fixtures__/event-fixtures');
+} = require("./__fixtures__/event-fixtures");
 const {
   openTasksView,
   completedTasksView,
-} = require('../../../user-interface/app-home');
+} = require("../../../user-interface/app-home");
 
 const userId = mockAppHomeOpenedEventNewUser.user;
 
-describe('app_home_opened event callback function test ', () => {
-  it('should call the callback func correctly for a new user who opened the app home', async () => {
+describe("app_home_opened event callback function test ", () => {
+  it("should call the callback func correctly for a new user who opened the app home", async () => {
     const mockAppHomeEventCallbackNewUserInput = mockAppHomeEventCallbackInput(
-      mockAppHomeOpenedEventNewUser,
+      mockAppHomeOpenedEventNewUser
     );
 
     await validateAppHomeOpenedCallback(mockAppHomeEventCallbackNewUserInput, {
@@ -25,36 +25,36 @@ describe('app_home_opened event callback function test ', () => {
     });
   });
 
-  it('should call the callback func correctly for an existing user who opened the app home Open Tasks tab with no open tasks', async () => {
+  it("should call the callback func correctly for an existing user who opened the app home Open Feedback App tab with no open tasks", async () => {
     const mockAppHomeEventCallbackExistingUserInput =
       mockAppHomeEventCallbackInput(mockAppHomeOpenedEventExistingUser);
-    // The private_metadata is set to open when the Open Tasks tab is opened
+    // The private_metadata is set to open when the Open Feedback App tab is opened
     mockAppHomeEventCallbackExistingUserInput.event.view.private_metadata =
-      'open';
+      "open";
 
     await validateAppHomeOpenedCallback(
       mockAppHomeEventCallbackExistingUserInput,
       {
         user_id: userId,
         view: openTasksView([]),
-      },
+      }
     );
   });
 
-  it('should call the callback func correctly for an existing user who opened the app home Completed Tasks tab with no completed tasks', async () => {
+  it("should call the callback func correctly for an existing user who opened the app home Completed Feedback App tab with no completed tasks", async () => {
     const mockAppHomeEventCallbackExistingUserInput =
       mockAppHomeEventCallbackInput(mockAppHomeOpenedEventExistingUser);
 
-    // The private_metadata is set to completed when the Completed Tasks tab is opened
+    // The private_metadata is set to completed when the Completed Feedback App tab is opened
     mockAppHomeEventCallbackExistingUserInput.event.view.private_metadata =
-      'completed';
+      "completed";
 
     await validateAppHomeOpenedCallback(
       mockAppHomeEventCallbackExistingUserInput,
       {
         user_id: userId,
         view: completedTasksView([]),
-      },
+      }
     );
   });
 });

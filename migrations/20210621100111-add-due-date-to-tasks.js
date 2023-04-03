@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => queryInterface.addColumn(
-    'Tasks',
+    'Feedbacks',
     'dueDate',
     {
       type: Sequelize.DATE,
@@ -9,7 +9,7 @@ module.exports = {
   ),
 
   down: async (queryInterface) => queryInterface.removeColumn(
-    'Tasks',
+    'Feedbacks',
     'dueDate',
   ),
 };

@@ -2,14 +2,14 @@ _metadata:
   major_version: 1
   minor_version: 1
 display_information:
-  name: Tasks
+  name: Feedback Sync
 features:
   app_home:
     home_tab_enabled: true
     messages_tab_enabled: true
     messages_tab_read_only_enabled: true
   bot_user:
-    display_name: Tasks
+    display_name: Feedback Sync
     always_online: false
   shortcuts:
     - name: Create a task

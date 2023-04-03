@@ -1,22 +1,22 @@
-const { taskCreated } = require('../index');
+const { taskCreated } = require("../index");
 
-test('Returns blocks for the task created modal', () => {
+test("Returns blocks for the task created modal", () => {
   const expected = {
     title: {
-      type: 'plain_text',
-      text: 'Task created',
+      type: "plain_text",
+      text: "Feedback created",
     },
-    callback_id: 'task-created-modal',
+    callback_id: "task-created-modal",
     blocks: [
       {
         text: {
-          type: 'mrkdwn',
-          text: 'Task Title created',
+          type: "mrkdwn",
+          text: "Feedback Title created",
         },
-        type: 'section',
+        type: "section",
       },
     ],
-    type: 'modal',
+    type: "modal",
   };
-  expect(taskCreated('Task Title')).toBe(JSON.stringify(expected));
+  expect(taskCreated("Feedback Title")).toBe(JSON.stringify(expected));
 });
