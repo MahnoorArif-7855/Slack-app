@@ -73,13 +73,13 @@ module.exports = (openTasks) => {
         )
     );
   }
-  const completedTaskList = holdingArray.map((task) =>
+  const completedTaskList = openTasks.map((task) =>
     Section({ text: `• ${task.title}` })
   );
 
   homeTab.blocks(
     Header({
-      text: `You have ${holdingArray.length} recently ${pluralize(
+      text: `You have ${openTasks.length} recently ${pluralize(
         "Feedback",
         holdingArray.length
       )}`,

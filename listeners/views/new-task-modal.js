@@ -1,6 +1,6 @@
 const { DateTime } = require("luxon");
 
-const { User, Task } = require("../../models");
+const { User, Feedback } = require("../../models");
 const { modals } = require("../../user-interface");
 const { taskReminder } = require("../../user-interface/messages");
 const { reloadAppHome } = require("../../utilities");
@@ -13,9 +13,9 @@ const newTaskModalCallback = async ({ ack, view, body, client }) => {
   const selectedDate = null;
   const selectedTime = DateTime.now();
 
-  const selectedUser = 1;
+  const selectedUser = body.user.id;
 
-  const task = Task.build({ title: taskTitle });
+  const task = Feedback.build({ title: taskTitle });
 
   if (selectedDate) {
     if (!selectedTime) {
@@ -29,7 +29,7 @@ const newTaskModalCallback = async ({ ack, view, body, client }) => {
     }
     const taskDueDate = DateTime.fromISO(`${selectedDate}T${selectedTime}`);
     const diffInDays = taskDueDate.diffNow("days").toObject().days;
-    // Task due date is in the past, so reject
+    // Feedback due date is in the past, so reject
     if (diffInDays < 0) {
       await ack({
         response_action: "errors",
@@ -107,7 +107,6 @@ const newTaskModalCallback = async ({ ack, view, body, client }) => {
       });
       await reloadAppHome(client, selectedUser, body.team.id);
     }
-    console.log("client -------------------------", client, body.user.id, body.team.id);
     await reloadAppHome(client, body.user.id, body.team.id);
   } catch (error) {
     await ack({

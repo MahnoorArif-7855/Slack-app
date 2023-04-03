@@ -1,10 +1,10 @@
-const { taskReminder } = require('../index');
+const { taskReminder } = require("../index");
 
-test('Returns payload for the task reminder API call', () => {
-  const taskTitle = 'Test Task';
-  const channel = 'C1234567';
+test("Returns payload for the task reminder API call", () => {
+  const taskTitle = "Test Feedback";
+  const channel = "C1234567";
   const postAt = 123456789;
-  const dueDate = 'Some date';
+  const dueDate = "Some date";
   const taskID = 1;
   const expected = {
     channel,
@@ -13,31 +13,32 @@ test('Returns payload for the task reminder API call', () => {
     blocks: [
       {
         text: {
-          type: 'mrkdwn',
+          type: "mrkdwn",
           text: `:wave: You asked me to remind you about "*${taskTitle}*".`,
         },
         accessory: {
           text: {
-            type: 'plain_text',
-            text: 'Mark as done',
+            type: "plain_text",
+            text: "Mark as done",
           },
           value: `task-${taskID}`,
-          action_id: 'button-mark-as-done',
-          type: 'button',
+          action_id: "button-mark-as-done",
+          type: "button",
         },
-        type: 'section',
+        type: "section",
       },
       {
         fields: [
-          { type: 'mrkdwn', text: '*Task title*' },
-          { type: 'mrkdwn', text: '*Due date*' },
-          { type: 'mrkdwn', text: taskTitle },
-          { type: 'mrkdwn', text: dueDate },
+          { type: "mrkdwn", text: "*Feedback title*" },
+          { type: "mrkdwn", text: "*Due date*" },
+          { type: "mrkdwn", text: taskTitle },
+          { type: "mrkdwn", text: dueDate },
         ],
-        type: 'section',
+        type: "section",
       },
     ],
   };
-  expect(taskReminder(postAt, channel, taskTitle, dueDate, taskID))
-    .toEqual(expected);
+  expect(taskReminder(postAt, channel, taskTitle, dueDate, taskID)).toEqual(
+    expected
+  );
 });

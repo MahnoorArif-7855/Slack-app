@@ -1,7 +1,7 @@
 {
   "name": "slackapi-tasks-app",
   "version": "1.0.0",
-  "description": "Tasks App is a sample Task Management app built on the Slack Platform.",
+  "description": "Feedback App is a sample Feedback Management app built on the Slack Platform.",
   "main": "app.js",
   "scripts": {
     "test": "jest --no-cache",

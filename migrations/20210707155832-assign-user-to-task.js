@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.renameColumn(
-      'Tasks',
+      'Feedbacks',
       'UserId',
       'creatorId',
       {
@@ -15,7 +15,7 @@ module.exports = {
       },
     );
     await queryInterface.addColumn(
-      'Tasks',
+      'Feedbacks',
       'currentAssigneeId',
       {
         type: Sequelize.UUID,
@@ -29,11 +29,11 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.removeColumn(
-      'Tasks',
+      'Feedbacks',
       'CurrentAssigneeId',
     );
     await queryInterface.renameColumn(
-      'Tasks',
+      'Feedbacks',
       'creatorId',
       'UserId',
       {

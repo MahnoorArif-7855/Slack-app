@@ -1,22 +1,22 @@
-const { taskCreationError } = require('../index');
+const { taskCreationError } = require("../index");
 
-test('Returns blocks for the task creation error modal', () => {
+test("Returns blocks for the task creation error modal", () => {
   const expected = {
     title: {
-      type: 'plain_text',
-      text: 'Something went wrong',
+      type: "plain_text",
+      text: "Something went wrong",
     },
-    callback_id: 'task-creation-error-modal',
+    callback_id: "task-creation-error-modal",
     blocks: [
       {
         text: {
-          type: 'mrkdwn',
-          text: "We couldn't create Task Title. Sorry!",
+          type: "mrkdwn",
+          text: "We couldn't create Feedback Title. Sorry!",
         },
-        type: 'section',
+        type: "section",
       },
     ],
-    type: 'modal',
+    type: "modal",
   };
-  expect(taskCreationError('Task Title')).toBe(JSON.stringify(expected));
+  expect(taskCreationError("Feedback Title")).toBe(JSON.stringify(expected));
 });

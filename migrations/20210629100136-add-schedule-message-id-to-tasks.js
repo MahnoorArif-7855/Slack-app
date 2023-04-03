@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => queryInterface.addColumn(
-    'Tasks',
+    'Feedbacks',
     'scheduledMessageId',
     {
       type: Sequelize.STRING,
@@ -9,7 +9,7 @@ module.exports = {
   ),
 
   down: async (queryInterface) => queryInterface.removeColumn(
-    'Tasks',
+    'Feedbacks',
     'scheduledMessageId',
   ),
 };
