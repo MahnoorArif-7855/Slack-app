@@ -9,6 +9,7 @@ const newTaskModalCallback = async ({ ack, view, body, client }) => {
   const providedValues = view.state.values;
 
   const taskTitle = providedValues.taskTitle.taskTitle.value;
+  console.log("taskTitle*********************************", taskTitle);
 
   const selectedDate = null;
   const selectedTime = DateTime.now();
@@ -117,5 +118,11 @@ const newTaskModalCallback = async ({ ack, view, body, client }) => {
     console.error(error);
   }
 };
+const createFeedbackDocument = async (collection) => {
+  const FeedbackDocument = {
+    feedback: "good",
+  };
+  await collection.insertOne(FeedbackDocument);
+};
 
-module.exports = { newTaskModalCallback };
+module.exports = { newTaskModalCallback, createFeedbackDocument };

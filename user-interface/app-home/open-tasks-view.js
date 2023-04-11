@@ -8,7 +8,7 @@ const {
   Input,
   Bits,
 } = require("slack-block-builder");
-const pluralize = require("pluralize");
+// const pluralize = require("pluralize");
 const { DateTime } = require("luxon");
 
 module.exports = (openTasks) => {
@@ -73,19 +73,16 @@ module.exports = (openTasks) => {
         )
     );
   }
-  const completedTaskList = openTasks.map((task) =>
-    Section({ text: `• ${task.title}` })
-  );
+  // const completedTaskList = openTasks.map((task) =>
+  //   Section({ text: `• ${task.title}` })
+  // );
 
   homeTab.blocks(
     Header({
-      text: `You have ${openTasks.length} recently ${pluralize(
-        "Feedback",
-        holdingArray.length
-      )}`,
+      text: `Feedback`,
     }),
     Divider(),
-    completedTaskList
+    Section({ text: "Create A Feedback " }),
   );
   // homeTab.blocks(
   //   Header({
